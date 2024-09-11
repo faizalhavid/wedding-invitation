@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Amore';
+  src: url('/amore.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'HughIsLife';
+  src: url('/HughIsLife.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -17,17 +30,79 @@
 }
 
 body {
+  user-select: none;
+  
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
+  /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.text-shadow-gold {
+    text-shadow: 2px 2px 4px #FFEC9E;
+}
+
+.bg-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 0.5) 25%, rgba(0, 0, 0, 0.1) 50%, transparent 70%), url(/images/calendar.jpg);
+    background-size: cover;
+    background-position: calc(100% - 45%);
+    background-repeat: no-repeat;
+    filter: grayscale(100%);
+    transition: filter 4s, background-position 4s;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+@keyframes fill {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.animate-fill {
+    animation-name: fill;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+
+.bottom-sheet {
+  @apply fixed bottom-0 w-full bg-black py-4 px-6 rounded-t-lg shadow-lg z-50 h-screen overflow-hidden;
+}
+
+.content {
+  @apply flex flex-col items-center justify-center;
+}
+
+
+@keyframes colorChange {
+  0% {
+      filter: hue-rotate(0deg);
   }
+  50% {
+      filter: hue-rotate(180deg);
+  }
+  100% {
+      filter: hue-rotate(360deg);
+  }
+}
+
+.animated-color {
+  animation: colorChange 5s infinite ease-in-out;
 }
